@@ -40,15 +40,19 @@ jobs:
       - name: Package
         run: vsce package ${{ inputs.level }}
 
+      - name: set env variable
+        env:
+          VERSION: ${{ $(jq -r '.version' package.json | tr -d '"') }}
+
       - name: setup variables and update changelog
         run: |
           value=$(jq -r '.version' package.json | tr -d '"')
           echo "version_value=$value" >> "$GITHUB_ENV"
           echo "version number is: $value"
           echo "version number is: ${value}"
-          echo "version number is: $version_value"
-          echo "version number is: ${{ env.version_value }}"
-          newline="\\n## [${{ env.version_value }}] - $(date +'%Y-%m-%d')"
+          echo "version number is: $VERSION"
+          echo "version number is: ${{ env.VERSION }}"
+          newline="\\n## [$value] - $(date +'%Y-%m-%d')"
           sed '/## \[UNRELEASED\]/a\'"$newline" CHANGELOG.md > CHANGELOG.md.tmp
           mv CHANGELOG.md.tmp CHANGELOG.md
 
