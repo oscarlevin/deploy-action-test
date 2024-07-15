@@ -44,6 +44,8 @@ jobs:
         run: |
           value=$(jq -r '.version' package.json | tr -d '"')
           echo "version_value=$value" >> "$GITHUB_ENV"
+          echo "version number is: $value"
+          echo "version number is: ${value}"
           echo "version number is: $version_value"
           echo "version number is: ${{ env.version_value }}"
           newline="\\n## [${{ env.version_value }}] - $(date +'%Y-%m-%d')"
@@ -73,7 +75,7 @@ jobs:
 
       - name: debug value
         run: |
-          echo "$version_value"
+          echo "$value"
 
       - name: Create Release
         id: create_release
