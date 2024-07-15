@@ -6,6 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [UNRELEASED]
 
+## [0.0.2] - 2024-07-15
+
 - more stuff
 
 ## [0.0.1]
