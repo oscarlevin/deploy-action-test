@@ -73,7 +73,7 @@ jobs:
 
       - name: debug value
         run: |
-          echo "${{ version_value }}"
+          echo "$version_value"
 
       - name: Create Release
         id: create_release
