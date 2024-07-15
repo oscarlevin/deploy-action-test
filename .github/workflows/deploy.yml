@@ -46,7 +46,7 @@ jobs:
       - name: setup variables and update changelog
         run: |
           value=$(jq -r '.version' package.json | tr -d '"')
-          echo "version_value=$value" >> "$GITHUB_ENV"
+          echo "version_value=${{ value }}" >> "$GITHUB_ENV"
           echo "version number is: ${{ version_value }}"
           newline="\\n## [${{ version_value }}] - $(date +'%Y-%m-%d')"
           sed '/## \[UNRELEASED\]/a\'"$newline" CHANGELOG.md > CHANGELOG.md.tmp
