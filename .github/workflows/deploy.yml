@@ -13,8 +13,6 @@ on:
           - "minor"
           - "major"
 
-env:
-  VERSION: ${{ github.event.inputs.level }}
 
 jobs:
   deploy:
@@ -30,7 +28,6 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          echo "Version: ${{ env.VERSION }}"
           npm install
           npm install -g @vscode/vsce
           npm install -g ovsx
@@ -46,9 +43,10 @@ jobs:
       - name: setup variables and update changelog
         run: |
           value=$(jq -r '.version' package.json | tr -d '"')
-          echo "version_value=${{ value }}" >> "$GITHUB_ENV"
-          echo "version number is: ${{ version_value }}"
-          newline="\\n## [${{ version_value }}] - $(date +'%Y-%m-%d')"
+          echo "version_value=$value" >> "$GITHUB_ENV"
+          echo "version number is: $version_value"
+          echo "version number is: ${{ env.version_value }}"
+          newline="\\n## [${{ env.version_value }}] - $(date +'%Y-%m-%d')"
           sed '/## \[UNRELEASED\]/a\'"$newline" CHANGELOG.md > CHANGELOG.md.tmp
           mv CHANGELOG.md.tmp CHANGELOG.md
 
