@@ -3,6 +3,7 @@
   "displayName": "deploy-test",
   "description": "just a test",
   "version": "0.0.1",
+  "publisher": "oscarlevin",
   "engines": {
     "vscode": "^1.91.0"
   },
