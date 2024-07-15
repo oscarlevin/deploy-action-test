@@ -40,9 +40,9 @@ jobs:
       - name: Package
         run: vsce package ${{ inputs.level }}
 
-      - name: set env variable
-        env:
-          VERSION: ${{ $(jq -r '.version' package.json | tr -d '"') }}
+      # - name: set env variable
+      #   env:
+      #     VERSION: ${{ $(jq -r '.version' package.json | tr -d '"') }}
 
       - name: setup variables and update changelog
         run: |
@@ -55,6 +55,10 @@ jobs:
           newline="\\n## [$value] - $(date +'%Y-%m-%d')"
           sed '/## \[UNRELEASED\]/a\'"$newline" CHANGELOG.md > CHANGELOG.md.tmp
           mv CHANGELOG.md.tmp CHANGELOG.md
+
+      - name: debug value
+        run: |
+          echo "$value"
 
       - name: Commit
         run: |
