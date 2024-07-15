@@ -68,23 +68,8 @@ jobs:
         run: |
           git push origin main
 
-  release:
-    needs: deploy
-    name: Create Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: setup variable
-        run: |
-          value=$(jq -r '.version' package.json | tr -d '"')
-          echo "version_value=$value" >> "$GITHUB_ENV"
-
       - name: debug value
         run: |
-          echo "$version_value"
-          echo "v${version_value}"
-          echo "v${{ env.version_value }}"
           echo "v${{ env.VERSION }}"
 
       - name: Create Release
@@ -93,9 +78,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: "v${{ env.version_value }}"
+          tag_name: "v${{ env.VERSION }}"
 
-          release_name: "v${{ env.version_value }}"
+          release_name: "v${{ env.VERSION }}"
 
           body: |
             See the [changelog](CHANGELOG.md) for details.
