@@ -2,7 +2,7 @@
   "name": "deploy-test",
   "displayName": "deploy-test",
   "description": "just a test",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "oscarlevin",
   "engines": {
     "vscode": "^1.91.0"
