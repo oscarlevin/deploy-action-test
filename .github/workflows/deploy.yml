@@ -13,6 +13,9 @@ on:
           - "minor"
           - "major"
 
+env:
+  VERSION: ${{ github.event.inputs.level }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -27,6 +30,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          echo "Version: ${{ env.VERSION }}"
           npm install
           npm install -g @vscode/vsce
           npm install -g ovsx
@@ -41,6 +45,7 @@ jobs:
 
       - name: setup variables and update changelog
         run: |
+          echo "Version: ${{ env.VERSION }}"
           value=$(jq -r '.version' package.json | tr -d '"')
           echo "VERSION=$value" >> "$GITHUB_ENV"
           echo "${{ env.VERSION }}"
